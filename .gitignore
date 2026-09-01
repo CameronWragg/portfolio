@@ -105,3 +105,17 @@ dist
 
 # MacOS Stuff
 .DS_Store
+# Vite
+dist-ssr
+*.local
+.vite
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
