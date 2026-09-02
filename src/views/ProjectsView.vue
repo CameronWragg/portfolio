@@ -29,10 +29,10 @@ function reset() {
 <template>
   <div class="mx-auto max-w-6xl px-5 py-16">
     <header>
-      <p class="font-mono text-sm text-accent">$ ls ~/projects</p>
+      <p class="font-mono text-sm text-accent">&gt;&gt;&gt; from cameron_wragg import projects</p>
       <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Projects</h1>
       <p class="mt-4 max-w-2xl leading-relaxed text-muted">
-        Pulled straight from
+        Every one of these is a personal project, built in my own time and pulled straight from
         <a
           :href="`https://github.com/${siteConfig.github.user}?tab=repositories`"
           target="_blank"
@@ -104,6 +104,6 @@ function reset() {
   @apply hover:border-[var(--accent)] hover:text-[var(--text)];
 }
 .chip-active {
-  @apply border-[var(--accent)] bg-[var(--accent)] text-[var(--color-ink-950)];
+  @apply border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-contrast)];
 }
 </style>

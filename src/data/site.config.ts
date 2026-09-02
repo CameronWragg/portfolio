@@ -54,11 +54,12 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   profile: {
     name: 'Cameron Wragg',
-    role: 'SoftwareEngineer',
-    tagline: 'I build things that run on servers, on desktops, and on very small computers.',
+    role: 'DataEngineer',
+    tagline: 'I build data pipelines by day, and things that run on very small computers by night.',
     about: [
-      'Software engineer with a soft spot for the places software meets hardware — Raspberry Pis, microcontrollers, and anything with a screen small enough to be a challenge.',
-      'Most of what I make in my own time ends up on GitHub. This page reads that list directly, so it is never out of date.',
+      'Data engineer by trade — pipelines, warehouses, and getting messy data into a shape people can actually make decisions with.',
+      'Away from work I have a soft spot for the places software meets hardware: Raspberry Pis, microcontrollers, and anything with a screen small enough to be a challenge.',
+      'Everything below is a personal project, built in my own time and pushed to GitHub. This page reads that list directly, so it is never out of date.',
     ],
     location: 'United Kingdom',
     links: [

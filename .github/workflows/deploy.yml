@@ -3,9 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # Refresh the project list daily so new public repos appear without a commit.
+  # Refresh the project list monthly so new public repos appear without a commit.
   schedule:
-    - cron: '17 5 * * *'
+    - cron: '0 0 1 * *'
   workflow_dispatch:
 
 permissions:
