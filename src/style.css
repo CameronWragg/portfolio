@@ -19,10 +19,12 @@
   --color-ink-900: #0e121a;
   --color-ink-950: #080b11;
 
-  --color-accent-300: #ffd08a;
-  --color-accent-400: #ffb454;
-  --color-accent-500: #f59e2b;
-  --color-accent-600: #c9791a;
+  /* Green — a deep forest green for the light theme, lifted just far enough
+     for the dark theme to stay readable against near-black. */
+  --color-accent-300: #8fd9b0;
+  --color-accent-400: #45a877;
+  --color-accent-500: #2b7d52;
+  --color-accent-600: #1b6b45;
 }
 
 :root {
@@ -34,6 +36,9 @@
   --text: var(--color-ink-900);
   --text-muted: var(--color-ink-500);
   --accent: var(--color-accent-600);
+  /* Text drawn on top of --accent. The light theme's green is dark enough to
+     need white; the dark theme's is bright enough to need ink. */
+  --accent-contrast: var(--color-white);
 }
 
 .dark {
@@ -45,6 +50,7 @@
   --text: var(--color-ink-50);
   --text-muted: var(--color-ink-400);
   --accent: var(--color-accent-400);
+  --accent-contrast: var(--color-ink-950);
 }
 
 @layer base {
@@ -61,7 +67,7 @@
 
   ::selection {
     background-color: var(--accent);
-    color: var(--color-ink-950);
+    color: var(--accent-contrast);
   }
 
   :focus-visible {
@@ -92,4 +98,8 @@
 
 @utility text-accent {
   color: var(--accent);
+}
+
+@utility on-accent {
+  color: var(--accent-contrast);
 }

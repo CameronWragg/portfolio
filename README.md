@@ -3,8 +3,8 @@
 Personal site for [Cameron Wragg](https://github.com/CameronWragg), built with Vue 3, Vite and
 Tailwind CSS, and deployed to GitHub Pages.
 
-The Projects page is generated from the public repositories on my GitHub account, so it keeps
-itself up to date.
+The Projects page is generated from the public repositories on my GitHub account — all of them
+personal projects — so it keeps itself up to date.
 
 ## Quick start
 
@@ -25,7 +25,7 @@ npm run dev        # http://localhost:5173
 ## Adding a project
 
 **Nothing to do.** Push a public repo to GitHub and it appears on the site the next time the
-site deploys — either on the next push to `main`, or on the daily scheduled run of the deploy
+site deploys — either on the next push to `main`, or on the monthly scheduled run of the deploy
 workflow. Cards fall back to the repo's own name, description, topics and language breakdown.
 
 To trigger a rebuild immediately: **Actions → Deploy to GitHub Pages → Run workflow**.
@@ -76,7 +76,7 @@ and tag collection. No API calls happen in the browser, so there are no rate lim
 ## Deployment
 
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds and publishes to GitHub
-Pages on every push to `main`, once a day on a schedule, and on demand.
+Pages on every push to `main`, once a month on a schedule (the 1st), and on demand.
 
 One-time setup: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 

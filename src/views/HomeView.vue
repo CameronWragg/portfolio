@@ -11,7 +11,7 @@ const highlights = featuredProjects.length ? featuredProjects : projects.slice(0
 <template>
   <div class="mx-auto max-w-6xl px-5">
     <section class="pt-20 pb-14 sm:pt-28 sm:pb-16">
-      <p class="font-mono text-sm text-accent">$ whoami</p>
+      <p class="font-mono text-sm text-accent">&gt;&gt;&gt; whoami()</p>
       <h1 class="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">{{ profile.name }}</h1>
       <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
         {{ profile.tagline }}
@@ -20,7 +20,7 @@ const highlights = featuredProjects.length ? featuredProjects : projects.slice(0
       <div class="mt-9 flex flex-wrap items-center gap-3">
         <RouterLink
           to="/projects"
-          class="rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-ink-950)] transition hover:brightness-110"
+          class="on-accent rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold transition hover:brightness-110"
         >
           View projects
         </RouterLink>
