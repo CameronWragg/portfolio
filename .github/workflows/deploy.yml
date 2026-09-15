@@ -35,16 +35,14 @@ jobs:
 
       - run: npm ci
 
-      - name: Sync projects from the GitHub API
-        run: npm run sync
-        env:
-          # Lifts the anonymous rate limit; only needs public repo read access.
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      # `prebuild` syncs projects from the GitHub API first, falling back to the
+      # committed snapshot if the API is unavailable.
       - name: Build
         run: npm run build
         env:
-          # e.g. "/portfolio/" for a project site, "/" for a user or custom-domain site.
+          # Lifts the anonymous rate limit for the sync; only needs public repo read access.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # e.g. "/portfolio" for a project site, "" for a user or custom-domain site.
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
       - name: Add SPA fallback

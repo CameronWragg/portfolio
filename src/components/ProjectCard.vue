@@ -27,17 +27,28 @@ const visibleTags = computed(() => props.project.tags.slice(0, 4))
 
 <template>
   <article
-    class="surface group flex flex-col overflow-hidden rounded-xl transition duration-200 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-xl hover:shadow-black/10"
+    class="surface group relative flex flex-col overflow-hidden rounded-xl transition duration-200 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-xl hover:shadow-black/10"
   >
     <div class="relative aspect-[16/9] overflow-hidden border-b border-[var(--border)]">
-      <img
-        v-if="imageSrc"
-        :src="imageSrc"
-        :alt="project.imageAlt"
-        loading="lazy"
-        decoding="async"
-        class="size-full object-cover transition duration-500 group-hover:scale-105"
-      />
+      <template v-if="imageSrc">
+        <!-- Letterboxed images sit on a blurred copy of themselves so the bars match the artwork. -->
+        <img
+          v-if="project.imageFit === 'contain'"
+          :src="imageSrc"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          class="absolute inset-0 size-full scale-110 object-cover opacity-60 blur-2xl"
+        />
+        <img
+          :src="imageSrc"
+          :alt="project.imageAlt"
+          loading="lazy"
+          decoding="async"
+          class="relative size-full transition duration-500 group-hover:scale-105"
+          :class="project.imageFit === 'contain' ? 'object-contain' : 'object-cover'"
+        />
+      </template>
       <div
         v-else
         class="flex size-full items-center justify-center"
@@ -113,9 +124,3 @@ const visibleTags = computed(() => props.project.tags.slice(0, 4))
     </div>
   </article>
 </template>
-
-<style scoped>
-article {
-  position: relative;
-}
-</style>

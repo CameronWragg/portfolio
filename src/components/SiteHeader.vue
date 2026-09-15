@@ -11,6 +11,10 @@ const open = ref(false)
 watch(() => route.fullPath, () => (open.value = false))
 
 const { name, role, links } = siteConfig.profile
+const pages = [
+  { to: '/', label: 'Home' },
+  { to: '/projects', label: 'Projects' },
+]
 </script>
 
 <template>
@@ -24,7 +28,7 @@ const { name, role, links } = siteConfig.profile
         :aria-label="`${name}, home`"
       >
         <span class="text-muted">def</span>
-        <span class="text-accent"> {{ name.toLowerCase().replace(' ', '_') }}</span>
+        <span class="text-accent"> {{ name.toLowerCase().replace(/\s+/g, '_') }}</span>
         <span class="text-muted">(</span><span class="hidden sm:inline">about_me</span
         ><span class="text-muted hidden sm:inline">) -&gt; </span>
         <span class="text-muted sm:hidden">) -&gt; </span>
@@ -32,8 +36,8 @@ const { name, role, links } = siteConfig.profile
       </RouterLink>
 
       <nav class="ml-auto hidden items-center gap-1 md:flex" aria-label="Main">
-        <RouterLink v-for="link in [{ to: '/', label: 'Home' }, { to: '/projects', label: 'Projects' }]" :key="link.to" :to="link.to" class="nav-link">
-          {{ link.label }}
+        <RouterLink v-for="page in pages" :key="page.to" :to="page.to" class="nav-link">
+          {{ page.label }}
         </RouterLink>
         <a
           v-for="link in links"
@@ -72,8 +76,9 @@ const { name, role, links } = siteConfig.profile
       class="border-t border-[var(--border)] px-5 pb-4 md:hidden"
       aria-label="Main"
     >
-      <RouterLink to="/" class="nav-link block py-2">Home</RouterLink>
-      <RouterLink to="/projects" class="nav-link block py-2">Projects</RouterLink>
+      <RouterLink v-for="page in pages" :key="page.to" :to="page.to" class="nav-link block py-2">
+        {{ page.label }}
+      </RouterLink>
       <a
         v-for="link in links"
         :key="link.url"

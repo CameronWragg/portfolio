@@ -16,6 +16,11 @@ export interface ProjectOverride {
   image?: string
   /** Alt text for the cover image. */
   imageAlt?: string
+  /**
+   * How the image fills the 16:9 card header. "cover" (default) crops to fill;
+   * "contain" shows the whole image — use it for square logos.
+   */
+  imageFit?: 'cover' | 'contain'
   /** Extra tags, merged with the repo's GitHub topics and languages. */
   tags?: string[]
   /** Pin to the top of the grid and show on the home page. */
@@ -88,6 +93,7 @@ export const siteConfig: SiteConfig = {
         'Turns a Raspberry Pi and a Pirate Audio HAT into a high-fidelity streaming endpoint, so Spotify and AirPlay play through an otherwise non-smart audio system.',
       image: 'images/hive-fi.jpeg',
       imageAlt: 'Hive-Fi project logo',
+      imageFit: 'contain',
       tags: ['Raspberry Pi', 'Audio', 'Home Lab'],
       featured: true,
     },

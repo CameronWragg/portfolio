@@ -13,10 +13,11 @@
  * Set GITHUB_TOKEN to lift the 60-requests-per-hour anonymous rate limit.
  */
 
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import type { RepoSnapshot } from '../src/data/repo-snapshot.ts'
 import { siteConfig } from '../src/data/site.config.ts'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -28,38 +29,17 @@ const { user, exclude, includeForks, includeArchived, requireDescription } = sit
 interface GitHubRepo {
   id: number
   name: string
-  full_name: string
   description: string | null
   html_url: string
   homepage: string | null
   language: string | null
   topics?: string[]
   stargazers_count: number
-  forks_count: number
   fork: boolean
   archived: boolean
   private: boolean
-  created_at: string
   pushed_at: string
   languages_url: string
-}
-
-export interface RepoSnapshot {
-  id: number
-  name: string
-  fullName: string
-  description: string | null
-  url: string
-  homepage: string | null
-  language: string | null
-  languages: string[]
-  topics: string[]
-  stars: number
-  forks: number
-  isFork: boolean
-  isArchived: boolean
-  createdAt: string
-  pushedAt: string
 }
 
 const headers: Record<string, string> = {
@@ -120,22 +100,16 @@ async function main() {
   const snapshot: RepoSnapshot[] = repos.map((repo, i) => ({
     id: repo.id,
     name: repo.name,
-    fullName: repo.full_name,
     description: repo.description,
     url: repo.html_url,
     homepage: repo.homepage || null,
-    language: repo.language,
     languages: languages[i]!,
     topics: repo.topics ?? [],
     stars: repo.stargazers_count,
-    forks: repo.forks_count,
-    isFork: repo.fork,
     isArchived: repo.archived,
-    createdAt: repo.created_at,
     pushedAt: repo.pushed_at,
   }))
 
-  await mkdir(dirname(outFile), { recursive: true })
   await writeFile(outFile, `${JSON.stringify(snapshot, null, 2)}\n`)
   console.log(`Synced ${snapshot.length} repo(s) from github.com/${user} -> ${outFile}`)
   for (const repo of snapshot) console.log(`  - ${repo.name}`)

@@ -1,26 +1,22 @@
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
-export type Theme = 'light' | 'dark'
+type Theme = 'light' | 'dark'
 
-const theme = ref<Theme>('dark')
-
-function apply(next: Theme) {
-  theme.value = next
-  document.documentElement.classList.toggle('dark', next === 'dark')
-  try {
-    localStorage.setItem('theme', next)
-  } catch {
-    // Private browsing or blocked storage — the choice just won't persist.
-  }
-}
+// The inline script in index.html picks the theme before first paint; mirror it.
+const theme = ref<Theme>(document.documentElement.classList.contains('dark') ? 'dark' : 'light')
 
 export function useTheme() {
-  onMounted(() => {
-    theme.value = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  })
-
   return {
     theme,
-    toggle: () => apply(theme.value === 'dark' ? 'light' : 'dark'),
+    toggle() {
+      const next: Theme = theme.value === 'dark' ? 'light' : 'dark'
+      theme.value = next
+      document.documentElement.classList.toggle('dark', next === 'dark')
+      try {
+        localStorage.setItem('theme', next)
+      } catch {
+        // Private browsing or blocked storage — the choice just won't persist.
+      }
+    },
   }
 }

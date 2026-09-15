@@ -3,7 +3,7 @@ import pluginVue from 'eslint-plugin-vue'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 
 export default defineConfigWithVueTs(
-  { ignores: ['dist/**', 'node_modules/**', 'src/data/repos.generated.json'] },
+  { ignores: ['dist/**'] },
   js.configs.recommended,
   // 'essential' covers correctness; the formatting rules in 'recommended'
   // just fight with the editor's formatter.

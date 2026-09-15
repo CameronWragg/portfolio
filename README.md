@@ -21,6 +21,7 @@ npm run dev        # http://localhost:5173
 | `npm run preview`   | Serve the production build locally                                   |
 | `npm run typecheck` | `vue-tsc` only                                                       |
 | `npm run lint`      | ESLint with `--fix`                                                  |
+| `npm run lint:check`| ESLint without fixing                                                |
 
 ## Adding a project
 
@@ -41,6 +42,7 @@ Add an entry to `projectOverrides`, keyed by the exact repo name:
   description: 'A better blurb.',   // defaults to the GitHub description
   image: 'images/my-new-repo.png',  // put the file in public/images/
   imageAlt: 'Screenshot of the app',
+  imageFit: 'contain',              // show the whole image (e.g. a square logo); default 'cover' crops
   tags: ['WebGL', 'Rust'],          // merged with GitHub topics + languages
   featured: true,                   // pin to the top and show on the home page
   order: 1,                         // manual sort weight, lower first
