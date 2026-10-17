@@ -1,0 +1,3 @@
+# Next.js as a static export, not a server app
+
+The site is rebuilt in Next.js (App Router, TypeScript) with Pico.css, replacing Vue, vue-router and Tailwind. It uses `output: 'export'`, so `next build` produces plain static files that Cloudflare serves with no server runtime. Nothing on the site needs SSR, ISR, API routes or middleware: the GitHub data is fetched once at build time, and new Repos appear on the next scheduled rebuild. Static export therefore avoids the OpenNext/Workers adapter and its bundle limits. Do not add features that need a Next.js server without revisiting this decision.

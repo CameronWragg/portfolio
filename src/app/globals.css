@@ -1,0 +1,347 @@
+/*
+ * Design language: Monokai Pro Ristretto on top of Pico.
+ * Raw palette first, then roles mapped onto Pico's variables, then the few
+ * components Pico doesn't cover. Components use roles, never raw colours.
+ */
+
+:root {
+  /* Ristretto palette */
+  --ristretto-bg-dark: #211c1c;
+  --ristretto-bg: #2c2525;
+  --ristretto-bg-light: #403838;
+  --ristretto-fg: #fff1f3;
+  --ristretto-fg-dim: #c3b7b8;
+  /* Lightened from Ristretto's #72696a, which fails WCAG AA on the background. */
+  --ristretto-comment: #9a9091;
+  --ristretto-red: #fd6883;
+  --ristretto-orange: #f38d70;
+  --ristretto-yellow: #f9cc6c;
+  --ristretto-green: #adda78;
+  --ristretto-cyan: #85dacc;
+  --ristretto-purple: #a8a9eb;
+
+  /* Roles */
+  --color-featured: var(--ristretto-orange);
+  --color-error: var(--ristretto-red);
+  --color-language-green: var(--ristretto-green);
+  --color-language-cyan: var(--ristretto-cyan);
+  --color-language-purple: var(--ristretto-purple);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --pico-font-family-monospace: var(--font-mono), ui-monospace, monospace;
+  --pico-background-color: var(--ristretto-bg);
+  --pico-color: var(--ristretto-fg);
+  --pico-muted-color: var(--ristretto-comment);
+  --pico-muted-border-color: var(--ristretto-bg-light);
+
+  --pico-primary: var(--ristretto-yellow);
+  --pico-primary-background: var(--ristretto-yellow);
+  --pico-primary-border: var(--ristretto-yellow);
+  --pico-primary-underline: color-mix(in srgb, var(--ristretto-yellow) 50%, transparent);
+  --pico-primary-hover: var(--ristretto-fg);
+  --pico-primary-hover-background: var(--ristretto-fg);
+  --pico-primary-hover-border: var(--ristretto-fg);
+  --pico-primary-hover-underline: var(--ristretto-fg);
+  --pico-primary-focus: color-mix(in srgb, var(--ristretto-yellow) 40%, transparent);
+  --pico-primary-inverse: var(--ristretto-bg);
+
+  --pico-h1-color: var(--ristretto-fg);
+  --pico-h2-color: var(--ristretto-fg);
+  --pico-h3-color: var(--ristretto-fg);
+  --pico-h4-color: var(--ristretto-fg);
+  --pico-h5-color: var(--ristretto-fg-dim);
+  --pico-h6-color: var(--ristretto-fg-dim);
+
+  --pico-card-background-color: var(--ristretto-bg-dark);
+  --pico-card-sectioning-background-color: var(--ristretto-bg-dark);
+  --pico-card-box-shadow: none;
+  --pico-code-background-color: var(--ristretto-bg-dark);
+  --pico-code-color: var(--ristretto-fg-dim);
+  --pico-mark-background-color: var(--ristretto-yellow);
+  --pico-mark-color: var(--ristretto-bg);
+}
+
+/* Type: mono for names, headings and anything terminal-flavoured; system sans for prose. */
+
+h1,
+h2,
+h3,
+hgroup > p,
+.site-name,
+.prompt,
+.tag,
+.marker,
+.project__meta,
+.timeline-item__meta,
+.profile-widget dt {
+  font-family: var(--pico-font-family-monospace);
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin-top: calc(var(--pico-spacing) * 2);
+}
+
+.muted {
+  color: var(--pico-muted-color);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--pico-spacing);
+  top: -100%;
+}
+
+.skip-link:focus {
+  top: var(--pico-spacing);
+}
+
+/* Header */
+
+.site-header nav [aria-current='page'] {
+  color: var(--pico-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.site-header nav a:not([aria-current]) {
+  color: var(--pico-color);
+}
+
+.site-name {
+  font-weight: 700;
+}
+
+/* Hero */
+
+.hero {
+  padding-block: calc(var(--pico-spacing) * 2);
+}
+
+.hero h1 {
+  color: var(--pico-primary);
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.hero__tagline {
+  font-size: 1.25rem;
+}
+
+.current-role a {
+  white-space: nowrap;
+}
+
+/* Project listing: terminal-style rows, no cards. */
+
+.prompt {
+  color: var(--pico-muted-color);
+  margin-bottom: 0;
+}
+
+.project {
+  container-type: inline-size;
+  padding: 0;
+  margin: 0;
+  padding-block: calc(var(--pico-spacing) * 1.5);
+  border-bottom: 1px dashed var(--pico-muted-border-color);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.banner {
+  /* Fit the Banner to the row: shrink the font until its columns fill the width (mono glyphs are 0.6em wide, plus a little slack). */
+  font-size: min(1rem, calc(100cqi / var(--banner-columns) / 0.62));
+  line-height: 1.15;
+  color: var(--pico-primary);
+  background: none;
+  padding: 0;
+  margin-bottom: calc(var(--pico-spacing) * 0.5);
+  overflow: hidden;
+}
+
+.project__name {
+  color: var(--pico-primary);
+  margin-bottom: calc(var(--pico-spacing) * 0.5);
+}
+
+.project__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75ch;
+  font-size: 0.8rem;
+  color: var(--pico-muted-color);
+  margin-bottom: calc(var(--pico-spacing) * 0.5);
+}
+
+.project__links {
+  display: flex;
+  gap: 2ch;
+  margin-bottom: 0;
+}
+
+.marker {
+  font-size: 0.8rem;
+}
+
+.marker::before {
+  content: '[';
+}
+
+.marker::after {
+  content: ']';
+}
+
+.marker--featured {
+  color: var(--color-featured);
+}
+
+.marker--muted {
+  color: var(--pico-muted-color);
+}
+
+/* Tags */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin-bottom: var(--pico-spacing);
+}
+
+.tags li {
+  list-style: none;
+  margin: 0;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.tag--neutral {
+  color: var(--ristretto-fg-dim);
+  border-color: var(--pico-muted-border-color);
+}
+
+.tag--green {
+  color: var(--color-language-green);
+}
+
+.tag--cyan {
+  color: var(--color-language-cyan);
+}
+
+.tag--purple {
+  color: var(--color-language-purple);
+}
+
+.tag:hover,
+.tag[aria-current='true'] {
+  color: var(--ristretto-bg);
+  background: var(--pico-primary);
+  border-color: var(--pico-primary);
+}
+
+.tag-filter__status {
+  font-size: 0.8rem;
+  color: var(--pico-muted-color);
+}
+
+/* Experience and Education */
+
+.timeline-item {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  padding-left: var(--pico-spacing);
+  border-left: 2px solid var(--pico-muted-border-color);
+  border-radius: 0;
+}
+
+.timeline-item header {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0 calc(var(--pico-spacing) * 0.5);
+}
+
+.timeline-item h3 {
+  margin-bottom: 0.25rem;
+}
+
+.timeline-item__meta,
+.timeline-item__tech {
+  font-size: 0.85rem;
+  color: var(--pico-muted-color);
+  margin-bottom: 0;
+}
+
+/* Footer and Profile Widgets */
+
+.site-footer {
+  margin-top: calc(var(--pico-spacing) * 3);
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+
+.profile-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--pico-spacing);
+}
+
+.profile-widget h2 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.profile-widget dl {
+  margin-bottom: var(--pico-spacing);
+}
+
+.profile-widget dl > div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1ch;
+}
+
+.profile-widget dt {
+  font-size: 0.8rem;
+  color: var(--pico-muted-color);
+  font-weight: normal;
+}
+
+.profile-widget dd {
+  margin: 0;
+}
+
+/* 404 */
+
+.not-found__error {
+  color: var(--color-error);
+  background: none;
+  padding: 0;
+  white-space: pre-wrap;
+}

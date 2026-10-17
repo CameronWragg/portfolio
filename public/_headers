@@ -1,0 +1,4 @@
+# Cloudflare Pages response headers. Next's static export writes the Open Graph
+# image without an extension, so tell browsers and link unfurlers what it is.
+/opengraph-image
+  Content-Type: image/png

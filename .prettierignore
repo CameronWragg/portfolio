@@ -1,0 +1,4 @@
+.next/
+out/
+package-lock.json
+src/data/github.generated.json

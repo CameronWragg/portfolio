@@ -6,21 +6,17 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": [
-        "Vue.volar",
-        "dbaeumer.vscode-eslint",
-        "bradlc.vscode-tailwindcss"
-      ],
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "vitest.explorer"],
       "settings": {
         "js/ts.tsdk.path": "node_modules/typescript/lib"
       }
     }
   },
   "postCreateCommand": "npm install",
-  "forwardPorts": [5173],
+  "forwardPorts": [3000],
   "portsAttributes": {
-    "5173": {
-      "label": "Vite dev server",
+    "3000": {
+      "label": "Next.js dev server",
       "onAutoForward": "notify"
     }
   },

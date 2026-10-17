@@ -1,0 +1,20 @@
+name: Scheduled rebuild
+
+# Cloudflare builds on every push to main. This adds a monthly rebuild so new
+# public Repos appear as Projects without a commit.
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare deploy hook
+        run: curl --fail --silent --show-error -X POST "$DEPLOY_HOOK_URL"
+        env:
+          # Cloudflare dashboard → the Pages project → Settings → Builds → Deploy hooks.
+          DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}

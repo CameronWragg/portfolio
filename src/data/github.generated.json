@@ -1,0 +1,51 @@
+{
+  "profile": {
+    "login": "CameronWragg",
+    "url": "https://github.com/CameronWragg",
+    "publicRepos": 4
+  },
+  "repos": [
+    {
+      "name": "hive-fi",
+      "description": "Personal HiFi Packages for Raspberry Pi w/ Pirate Audio HAT",
+      "url": "https://github.com/CameronWragg/hive-fi",
+      "homepage": null,
+      "languages": {
+        "Python": 35495,
+        "Shell": 2889
+      },
+      "topics": [],
+      "isArchived": false,
+      "pushedAt": "2026-10-09T13:15:09Z"
+    },
+    {
+      "name": "dots-watch-face",
+      "description": "A watch face made for Garmin devices formed with lots of little circles.",
+      "url": "https://github.com/CameronWragg/dots-watch-face",
+      "homepage": null,
+      "languages": {
+        "Monkey C": 61828,
+        "Python": 24470,
+        "Dockerfile": 2590,
+        "Shell": 1609
+      },
+      "topics": [],
+      "isArchived": false,
+      "pushedAt": "2026-10-08T13:20:09Z"
+    },
+    {
+      "name": "presto-deck",
+      "description": "Projects for the Pimoroni Presto",
+      "url": "https://github.com/CameronWragg/presto-deck",
+      "homepage": null,
+      "languages": {
+        "Python": 186137,
+        "Dockerfile": 1776,
+        "Shell": 1263
+      },
+      "topics": [],
+      "isArchived": false,
+      "pushedAt": "2026-09-15T11:41:18Z"
+    }
+  ]
+}
